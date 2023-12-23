@@ -14,7 +14,9 @@ function App() {
     },
   ]);
 
+  // value state
   const [value, setValue] = React.useState("");
+  // form submit function
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!value) return;
@@ -22,10 +24,19 @@ function App() {
     setTodos(newTodos);
     setValue("");
   };
+
+  const removeTodo = (e) => {
+    const index = Number(e.target.id);
+    let temp = [...todos];
+    temp.splice(index, 1);
+    setTodos(temp);
+  };
+
+  // returned to Component App
   return (
     <>
       {todos.map((todo, i) => (
-        <div className="todo" key={i}>
+        <div className="todo" key={i} id={i} onClick={removeTodo}>
           {todo.text}
         </div>
       ))}
